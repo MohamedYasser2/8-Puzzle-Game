@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.AbstractQueue;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class BFS {
     public static void main(String[] args) {
@@ -14,6 +11,8 @@ public class BFS {
 
     Queue<String> queue = new LinkedList();
     ArrayList<String> visited = new ArrayList<>();
+    HashMap<String, String> hashMap= new HashMap<String, String>();
+    ArrayList<String> pathList = new ArrayList<>();
 
 
     public  Boolean Bfs(String initialState , String goalState){
@@ -22,6 +21,9 @@ public class BFS {
             String top = queue.remove();
             visited.add(top);
             if (top.equals(goalState)){
+                getPath(top);
+                Collections.reverse(pathList);
+                System.out.println(pathList.toString());
                 return true;
             }
             neighbors(top);
@@ -39,9 +41,11 @@ public class BFS {
                 String down0 = swapChar(state , index , index+3);
                 if (!visited.contains(down0)) {
                     queue.add(down0);
+                    hashMap.put(down0 , state);
                 }
                 if (!visited.contains(right0)) {
                     queue.add(right0);
+                    hashMap.put(right0 , state);
                 }
                 break;
             case 1:
@@ -50,12 +54,15 @@ public class BFS {
                 String left1 = swapChar(state , index , index-1);
                 if (!visited.contains(down1)) {
                     queue.add(down1);
+                    hashMap.put(down1 , state);
                 }
                 if (!visited.contains(left1)) {
                     queue.add(left1);
+                    hashMap.put(left1 , state);
                 }
                 if (!visited.contains(right1)) {
                     queue.add(right1);
+                    hashMap.put(right1 , state);
                 }
                 break;
             case 2:
@@ -63,9 +70,11 @@ public class BFS {
                 String left2 = swapChar(state , index , index-1);
                 if (!visited.contains(down2)) {
                     queue.add(down2);
+                    hashMap.put(down2 , state);
                 }
                 if (!visited.contains(left2)) {
                     queue.add(left2);
+                    hashMap.put(left2 , state);
                 }
                 break;
             case 3:
@@ -74,12 +83,15 @@ public class BFS {
                 String up3 = swapChar(state , index , index-3);
                 if (!visited.contains(up3)) {
                     queue.add(up3);
+                    hashMap.put(up3 , state);
                 }
                 if (!visited.contains(down3)) {
                     queue.add(down3);
+                    hashMap.put(down3 , state);
                 }
                 if (!visited.contains(right3)) {
                     queue.add(right3);
+                    hashMap.put(right3 , state);
                 }
                 break;
             case 4:
@@ -89,15 +101,19 @@ public class BFS {
                 String up4 = swapChar(state , index , index-3);
                 if (!visited.contains(up4)) {
                     queue.add(up4);
+                    hashMap.put(up4 , state);
                 }
                 if (!visited.contains(down4)) {
                     queue.add(down4);
+                    hashMap.put(down4 , state);
                 }
                 if (!visited.contains(left4)) {
                     queue.add(left4);
+                    hashMap.put(left4 , state);
                 }
                 if (!visited.contains(right4)) {
                     queue.add(right4);
+                    hashMap.put(right4 , state);
                 }
                 break;
             case 5:
@@ -106,12 +122,15 @@ public class BFS {
                 String up5 = swapChar(state , index , index-3);
                 if (!visited.contains(up5)) {
                     queue.add(up5);
+                    hashMap.put(up5 , state);
                 }
                 if (!visited.contains(down5)) {
                     queue.add(down5);
+                    hashMap.put(down5 , state);
                 }
                 if (!visited.contains(left5)) {
                     queue.add(left5);
+                    hashMap.put(left5 , state);
                 }
                 break;
             case 6:
@@ -119,9 +138,11 @@ public class BFS {
                 String up6 = swapChar(state , index , index-3);
                 if (!visited.contains(up6)) {
                     queue.add(up6);
+                    hashMap.put(up6 , state);
                 }
                 if (!visited.contains(right6)) {
                     queue.add(right6);
+                    hashMap.put(right6 , state);
                 }
                 break;
             case 7:
@@ -130,12 +151,15 @@ public class BFS {
                 String up7 = swapChar(state , index , index-3);
                 if (!visited.contains(up7)) {
                     queue.add(up7);
+                    hashMap.put(up7 , state);
                 }
                 if (!visited.contains(left7)) {
                     queue.add(left7);
+                    hashMap.put(left7 , state);
                 }
                 if (!visited.contains(right7)) {
                     queue.add(right7);
+                    hashMap.put(right7 , state);
                 }
                 break;
             case 8:
@@ -143,9 +167,12 @@ public class BFS {
                 String up8 = swapChar(state , index , index-3);
                 if (!visited.contains(up8)) {
                     queue.add(up8);
+                    hashMap.put(up8 , state);
+
                 }
                 if (!visited.contains(left8)) {
                     queue.add(left8);
+                    hashMap.put(left8 , state);
                 }
                 break;
         }
@@ -158,4 +185,13 @@ public class BFS {
         sb.setCharAt(j, l);
         return sb.toString();
     }
+
+    public  void getPath(String state){
+        if (hashMap.containsKey(state)){
+        String path = hashMap.get(state);
+        pathList.add(path);
+        getPath(path);
+        }
+    }
 }
+
