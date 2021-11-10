@@ -204,7 +204,7 @@ public class InformedSearch {
                     y=3;
                     break;
             }
-            result+= Math.sqrt((x-xg)*(x-xg))+Math.sqrt((y-yg)*(y-yg));
+            result+= Math.sqrt((x-xg)*(x-xg)+(y-yg)*(y-yg));
         }
         return result;
     }
@@ -221,8 +221,8 @@ public class InformedSearch {
 //        while (!frontier.isEmpty()) {
 //            System.out.println(frontier.poll().key);
 //        }
-        //System.out.println(ManhattanDistance("125340678"));
-        //System.out.println(EuclideanDistance("125340678"));
+        System.out.println(ManhattanDistance("125340678"));
+        System.out.println(EuclideanDistance("125340678"));
         informedSearch("125340678");
     }
 
@@ -235,7 +235,7 @@ public class InformedSearch {
         frontier.add(new State(initialState,ManhattanDistance(initialState)));
         while (!frontier.isEmpty()) {
             State top = frontier.poll();
-            System.out.println(top.key);
+            //System.out.println(top.key);
             visited.add(top.getValue());
             if (top.getValue().equals("012345678")){
                 getPath(top.getValue());
@@ -392,7 +392,7 @@ public class InformedSearch {
         }
     }
     private static int calcKey(State parent, String st){
-        return (parent.getKey()-ManhattanDistance(parent.getValue()))+ManhattanDistance(st)+1;
+        return (parent.getKey()-EuclideanDistance(parent.getValue()))+EuclideanDistance(st)+1;
     }
     private static String swapChar(String str, int i, int j) {
         StringBuilder sb = new StringBuilder(str);
