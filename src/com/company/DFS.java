@@ -5,20 +5,19 @@ import java.util.*;
 
 public class DFS {
     public static void main(String[]args){
-        String initial = "128567340";
+        String initial = "437126580";
         System.out.println(new DFS().dfs(initial));
     }
     Map<String, String> hashMap= new HashMap<>();
     List<String> pathList = new ArrayList<>();
+    Stack<String> frontier = new Stack<>();
+    Set<String> visitedStates = new HashSet<>();
 
     String goalState = "123456780";
     public boolean dfs (String initialState) {
-        Stack<String> frontier = new Stack<>();
         frontier.add(initialState);
-        Set<String> visitedStates = new HashSet<>();
         while (!frontier.isEmpty()) {
             String currentState = frontier.pop();
-            System.out.println(currentState);
             visitedStates.add(currentState);
             if (currentState.equals(goalState)) {
                 getPath(currentState, initialState);
@@ -187,11 +186,9 @@ public class DFS {
         if (hashMap.containsKey(state)) {
             String path = hashMap.get(state);
             pathList.add(path);
-            while (path.equals(initialState)) {
-                if (hashMap.containsKey(state)) {
-                    path = hashMap.get(state);
+            while (!path.equals(initialState)) {
+                    path = hashMap.get(path);
                     pathList.add(path);
-                }
             }
         }
     }

@@ -23,7 +23,7 @@ public class BFS {
             if (top.equals(goalState)){
                 getPath(top);
                 Collections.reverse(pathList);
-                System.out.println(pathList.toString());
+                System.out.println(pathList);
                 return true;
             }
             neighbors(top);
