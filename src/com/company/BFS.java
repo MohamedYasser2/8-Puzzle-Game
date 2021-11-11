@@ -9,7 +9,7 @@ public class BFS implements IPuzzleSolver{
     Set<String> visited = new HashSet<>();
     HashMap<String, String> hashMap= new HashMap<String, String>();
     ArrayList<String> pathList = new ArrayList<>();
-    String goalState = "123456780";
+    String goalState = "012345678";
 
     public void neighbors(String state){
         int index = state.indexOf('0');
