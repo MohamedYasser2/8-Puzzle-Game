@@ -182,6 +182,7 @@ public class BFS implements IPuzzleSolver{
             if (top.equals(goalState)){
                 getPath(top );
                 Collections.reverse(pathList);
+                pathList.add(goalState);
                 return pathList;
             }
             neighbors(top);
