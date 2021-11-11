@@ -5,12 +5,12 @@ import java.util.*;
 public class BFS {
     public static void main(String[] args) {
         BFS test = new BFS();
-        test.Bfs("125340678" , "012345678");
+        test.Bfs("632584170" , "012345678");
     }
 
 
     Queue<String> queue = new LinkedList();
-    ArrayList<String> visited = new ArrayList<>();
+    Set<String> visited = new HashSet<>();
     HashMap<String, String> hashMap= new HashMap<String, String>();
     ArrayList<String> pathList = new ArrayList<>();
 
@@ -18,10 +18,10 @@ public class BFS {
     public  Boolean Bfs(String initialState , String goalState){
         queue.add(initialState);
         while (!queue.isEmpty()){
-            String top = queue.remove();
+            String top = queue.poll();
             visited.add(top);
             if (top.equals(goalState)){
-                getPath(top);
+                getPath(top );
                 Collections.reverse(pathList);
                 System.out.println(pathList);
                 return true;
@@ -29,7 +29,7 @@ public class BFS {
             neighbors(top);
         }
 
-        return true;
+        return false;
     }
 
 
@@ -186,11 +186,19 @@ public class BFS {
         return sb.toString();
     }
 
-    public  void getPath(String state){
-        if (hashMap.containsKey(state)){
-        String path = hashMap.get(state);
-        pathList.add(path);
-        getPath(path);
+//    public  void getPath(String state){
+//        if (hashMap.containsKey(state)){
+//        String path = hashMap.get(state);
+//        pathList.add(path);
+//        getPath(path);
+//        }
+//    }
+
+    public void getPath(String state){
+        while (hashMap.containsKey(state)){
+            String path = hashMap.get(state);
+            pathList.add(path);
+            state = path;
         }
     }
 }
