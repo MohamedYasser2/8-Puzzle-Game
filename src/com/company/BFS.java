@@ -187,7 +187,7 @@ public class BFS implements IPuzzleSolver{
             neighbors(top);
         }
 
-        return pathList;
+        return new ArrayList<>();
     }
 
 //    public  Boolean Bfs(String initialState , String goalState){

@@ -19,7 +19,7 @@ public class InformedSearch implements IPuzzleSolver{
             }
             neighbors(top);
         }
-        return pathList;    }
+        return new ArrayList<>();    }
 
     public static class State implements Comparable<State> {
         private String value;
