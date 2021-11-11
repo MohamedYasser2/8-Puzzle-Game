@@ -2,36 +2,14 @@ package com.company;
 
 import java.util.*;
 
-public class BFS {
-    public static void main(String[] args) {
-        BFS test = new BFS();
-        test.Bfs("632584170" , "012345678");
-    }
+public class BFS implements IPuzzleSolver{
 
 
     Queue<String> queue = new LinkedList();
     Set<String> visited = new HashSet<>();
     HashMap<String, String> hashMap= new HashMap<String, String>();
     ArrayList<String> pathList = new ArrayList<>();
-
-
-    public  Boolean Bfs(String initialState , String goalState){
-        queue.add(initialState);
-        while (!queue.isEmpty()){
-            String top = queue.poll();
-            visited.add(top);
-            if (top.equals(goalState)){
-                getPath(top );
-                Collections.reverse(pathList);
-                System.out.println(pathList);
-                return true;
-            }
-            neighbors(top);
-        }
-
-        return false;
-    }
-
+    String goalState = "123456780";
 
     public void neighbors(String state){
         int index = state.indexOf('0');
@@ -186,13 +164,6 @@ public class BFS {
         return sb.toString();
     }
 
-//    public  void getPath(String state){
-//        if (hashMap.containsKey(state)){
-//        String path = hashMap.get(state);
-//        pathList.add(path);
-//        getPath(path);
-//        }
-//    }
 
     public void getPath(String state){
         while (hashMap.containsKey(state)){
@@ -201,5 +172,39 @@ public class BFS {
             state = path;
         }
     }
+
+    @Override
+    public List<String> solvePuzzle(String initialState) {
+        queue.add(initialState);
+        while (!queue.isEmpty()){
+            String top = queue.poll();
+            visited.add(top);
+            if (top.equals(goalState)){
+                getPath(top );
+                Collections.reverse(pathList);
+                return pathList;
+            }
+            neighbors(top);
+        }
+
+        return pathList;
+    }
+
+//    public  Boolean Bfs(String initialState , String goalState){
+//        queue.add(initialState);
+//        while (!queue.isEmpty()){
+//            String top = queue.poll();
+//            visited.add(top);
+//            if (top.equals(goalState)){
+//                getPath(top );
+//                Collections.reverse(pathList);
+//                System.out.println(pathList);
+//                return true;
+//            }
+//            neighbors(top);
+//        }
+//
+//        return false;
+//    }
 }
 

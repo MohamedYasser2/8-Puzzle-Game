@@ -3,33 +3,12 @@ package com.company;
 import java.util.*;
 
 
-public class DFS {
-    public static void main(String[]args){
-        String initial = "437126580";
-        System.out.println(new DFS().dfs(initial));
-    }
+public class DFS implements IPuzzleSolver{
     Map<String, String> hashMap= new HashMap<>();
     List<String> pathList = new ArrayList<>();
     Stack<String> frontier = new Stack<>();
     Set<String> visitedStates = new HashSet<>();
-
     String goalState = "123456780";
-    public boolean dfs (String initialState) {
-        frontier.add(initialState);
-        while (!frontier.isEmpty()) {
-            String currentState = frontier.pop();
-            visitedStates.add(currentState);
-            if (currentState.equals(goalState)) {
-                getPath(currentState, initialState);
-                Collections.reverse(pathList);
-                pathList.add(goalState);
-                System.out.println(pathList);
-                return true;
-            }
-            generateNeighbors(currentState, frontier, visitedStates, hashMap);
-        }
-        return false;
-    }
     private void generateNeighbors(String state, Stack<String> frontier, Set<String> visited, Map<String, String> hashMap) {
         int index = state.indexOf('0');
         switch (index) {
@@ -193,4 +172,37 @@ public class DFS {
         }
     }
 
+    @Override
+    public List<String> solvePuzzle(String initialState) {
+        frontier.add(initialState);
+        while (!frontier.isEmpty()) {
+            String currentState = frontier.pop();
+            visitedStates.add(currentState);
+            if (currentState.equals(goalState)) {
+                getPath(currentState, initialState);
+                Collections.reverse(pathList);
+                pathList.add(goalState);
+                return pathList;
+            }
+            generateNeighbors(currentState, frontier, visitedStates, hashMap);
+        }
+        return new ArrayList<>();
+    }
+
+//    public boolean dfs (String initialState) {
+//        frontier.add(initialState);
+//        while (!frontier.isEmpty()) {
+//            String currentState = frontier.pop();
+//            visitedStates.add(currentState);
+//            if (currentState.equals(goalState)) {
+//                getPath(currentState, initialState);
+//                Collections.reverse(pathList);
+//                pathList.add(goalState);
+//                System.out.println(pathList);
+//                return true;
+//            }
+//            generateNeighbors(currentState, frontier, visitedStates, hashMap);
+//        }
+//        return false;
+//    }
 }

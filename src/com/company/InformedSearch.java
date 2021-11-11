@@ -2,7 +2,24 @@ package com.company;
 
 import java.util.*;
 
-public class InformedSearch {
+public class InformedSearch implements IPuzzleSolver{
+
+    @Override
+    public List<String> solvePuzzle(String initialState) {
+        frontier.add(new State(initialState,ManhattanDistance(initialState)));
+        while (!frontier.isEmpty()) {
+            State top = frontier.poll();
+            //System.out.println(top.key);
+            visited.add(top.getValue());
+            if (top.getValue().equals("012345678")){
+                getPath(top.getValue());
+                Collections.reverse(pathList);
+                System.out.println(pathList.toString());
+                return pathList;
+            }
+            neighbors(top);
+        }
+        return pathList;    }
 
     public static class State implements Comparable<State> {
         private String value;
@@ -13,9 +30,6 @@ public class InformedSearch {
             this.key = key;
         }
 
-        public void setValue(String value) {
-            this.value = value;
-        }
 
         public void setKey(int key) {
             this.key = key;
@@ -209,22 +223,22 @@ public class InformedSearch {
         return result;
     }
 
-    public static void main(String[] args){
-        //PriorityQueue<State> queue = new PriorityQueue<>();
-//        frontier.add(new State("hh",2));
-//        frontier.add(new State("hhh",3));
-//        frontier.add(new State("h",-1));
-//        frontier.add(new State("-",-10));
-//        Random rd = new Random();
-//       for (int i=0;i<20;++i)
-//            frontier.add(new State("",rd.nextInt()));
-//        while (!frontier.isEmpty()) {
-//            System.out.println(frontier.poll().key);
-//        }
-        System.out.println(ManhattanDistance("125340678"));
-        System.out.println(EuclideanDistance("125340678"));
-        informedSearch("125340678");
-    }
+//    public static void main(String[] args){
+//        //PriorityQueue<State> queue = new PriorityQueue<>();
+////        frontier.add(new State("hh",2));
+////        frontier.add(new State("hhh",3));
+////        frontier.add(new State("h",-1));
+////        frontier.add(new State("-",-10));
+////        Random rd = new Random();
+////       for (int i=0;i<20;++i)
+////            frontier.add(new State("",rd.nextInt()));
+////        while (!frontier.isEmpty()) {
+////            System.out.println(frontier.poll().key);
+////        }
+//        System.out.println(ManhattanDistance("125340678"));
+//        System.out.println(EuclideanDistance("125340678"));
+//        informedSearch("125340678");
+//    }
 
     static PriorityQueue<State> frontier = new PriorityQueue<>();
     static ArrayList<String> visited = new ArrayList<>();
