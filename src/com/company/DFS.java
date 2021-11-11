@@ -8,7 +8,7 @@ public class DFS implements IPuzzleSolver{
     List<String> pathList = new ArrayList<>();
     Stack<String> frontier = new Stack<>();
     Set<String> visitedStates = new HashSet<>();
-    String goalState = "123456780";
+    String goalState = "012345678";
     private void generateNeighbors(String state, Stack<String> frontier, Set<String> visited, Map<String, String> hashMap) {
         int index = state.indexOf('0');
         switch (index) {
@@ -57,13 +57,13 @@ public class DFS implements IPuzzleSolver{
                 String right3 = swapChar(state , index , index+1);
                 String down3 = swapChar(state , index , index+3);
                 String up3 = swapChar(state , index , index-3);
-                if (!visited.contains(up3)) {
-                    frontier.add(up3);
-                    hashMap.put(up3 , state);
-                }
                 if (!visited.contains(down3)) {
                     frontier.add(down3);
                     hashMap.put(down3 , state);
+                }
+                if (!visited.contains(up3)) {
+                    frontier.add(up3);
+                    hashMap.put(up3, state);
                 }
                 if (!visited.contains(right3)) {
                     frontier.add(right3);
@@ -75,13 +75,13 @@ public class DFS implements IPuzzleSolver{
                 String down4 = swapChar(state , index , index+3);
                 String left4 = swapChar(state , index , index-1);
                 String up4 = swapChar(state , index , index-3);
-                if (!visited.contains(up4)) {
-                    frontier.add(up4);
-                    hashMap.put(up4 , state);
-                }
                 if (!visited.contains(down4)) {
                     frontier.add(down4);
                     hashMap.put(down4 , state);
+                }
+                if (!visited.contains(up4)) {
+                    frontier.add(up4);
+                    hashMap.put(up4 , state);
                 }
                 if (!visited.contains(left4)) {
                     frontier.add(left4);
@@ -96,13 +96,13 @@ public class DFS implements IPuzzleSolver{
                 String down5 = swapChar(state , index , index+3);
                 String left5 = swapChar(state , index , index-1);
                 String up5 = swapChar(state , index , index-3);
-                if (!visited.contains(up5)) {
-                    frontier.add(up5);
-                    hashMap.put(up5 , state);
-                }
                 if (!visited.contains(down5)) {
                     frontier.add(down5);
                     hashMap.put(down5 , state);
+                }
+                if (!visited.contains(up5)) {
+                    frontier.add(up5);
+                    hashMap.put(up5 , state);
                 }
                 if (!visited.contains(left5)) {
                     frontier.add(left5);
