@@ -11,6 +11,10 @@ public class DFS extends IPuzzleSolver{
     */
     @Override
     public List<String> solvePuzzle(String initialState) {
+        frontierStack = new Stack<>();
+        visited = new HashSet<>();
+        hashMap = new HashMap<>();
+        pathList = new ArrayList<>();
         frontierStack.add(initialState);
         while (!frontierStack.isEmpty()) {
             String currentState = frontierStack.pop();
