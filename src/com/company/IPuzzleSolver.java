@@ -3,6 +3,9 @@ package com.company;
 import java.util.*;
 
 public abstract class IPuzzleSolver {
+    /*
+    Data Structures used in different solving algorithms
+     */
     Map<String, String> hashMap= new HashMap<>();
     List<String> pathList = new ArrayList<>();
     Queue<String> frontierQueue = new LinkedList();
@@ -14,6 +17,10 @@ public abstract class IPuzzleSolver {
 
     public abstract List<String> solvePuzzle(String initialState);
 
+    /*
+    A function that is called after solving the puzzle to get the path
+    from the initial state to the goal state from the hash map
+    */
     public void getPath(String state, String initialState) {
         if (hashMap.containsKey(state)) {
             String path = hashMap.get(state);
@@ -25,6 +32,11 @@ public abstract class IPuzzleSolver {
         }
     }
 
+    /*
+    A function that performs every move in the puzzle
+    by swapping the '0' character with another character
+    and returning the updated string after performing the puzzle move
+    */
     public static String swapChar(String str, int i, int j) {
         StringBuilder sb = new StringBuilder(str);
         char l = sb.charAt(i), r = sb.charAt(j);
@@ -33,6 +45,13 @@ public abstract class IPuzzleSolver {
         return sb.toString();
     }
 
+    /*
+    A function that takes the current state of the puzzle as a parameter
+    and according to the position of '0',
+    It generates all the neighbors of '0' that the '0' can be moved to
+    and push them to the suitable frontier data structure
+    according to the used algorithm for solving the puzzle
+    */
     public void generateNeighbors(String state, Algorithm algorithm) {
         int index = state.indexOf('0');
         switch (index) {
@@ -104,7 +123,11 @@ public abstract class IPuzzleSolver {
                 break;
         }
     }
-
+    /*
+    A function that push every generated neighbor of '0'
+    to the suitable frontier data structure
+    according to the used algorithm for solving the puzzle
+    */
     private void addNeighborToFrontier(String parentState, String childState, Algorithm algorithm) {
         switch (algorithm) {
             case BFS:
