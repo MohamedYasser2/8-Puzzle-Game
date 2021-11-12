@@ -3,7 +3,7 @@ package com.company;
 import java.util.*;
 
 
-public class InformedSearch extends IPuzzleSolver{
+public class InformedSearchManhattan extends IPuzzleSolver{
 
     @Override
     public List<String> solvePuzzle(String initialState) {
@@ -21,7 +21,8 @@ public class InformedSearch extends IPuzzleSolver{
             }
             neighbors(top);
         }
-        return new ArrayList<>();    }
+        return new ArrayList<>();
+    }
 
 
 
@@ -373,7 +374,8 @@ public class InformedSearch extends IPuzzleSolver{
         }
     }
     private static int calcKey(State parent, String st){
-        return (parent.getKey()-EuclideanDistance(parent.getValue()))+EuclideanDistance(st)+1;
+
+        return (parent.getKey()-ManhattanDistance(parent.getValue()))+ManhattanDistance(st)+1;
     }
 
     public boolean inFrontier(String state,int key){
