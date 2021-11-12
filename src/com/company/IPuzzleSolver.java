@@ -147,6 +147,10 @@ public abstract class IPuzzleSolver {
         }
     }
 
+    /* A function to check if the new state is in the frontier priority queue or not
+    * and if it is already exist it compare the 2 keys and take the minimum one
+    * return true if it decreased the key false otherwise
+    */
     public boolean inFrontier(String state,int key){
         Iterator it = frontierPriorityQueue.iterator();
         while (it.hasNext()){
