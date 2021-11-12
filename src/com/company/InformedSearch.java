@@ -12,7 +12,7 @@ public class InformedSearch extends IPuzzleSolver{
             State top = frontierPriorityQueue.poll();
             //System.out.println(top.key);
             visited.add(top.getValue());
-            if (top.getValue().equals("012345678")){
+            if (top.getValue().equals(goalState)){
                 getPath(top.getValue(), initialState);
                 Collections.reverse(pathList);
                 pathList.add(goalState);
@@ -229,7 +229,7 @@ public class InformedSearch extends IPuzzleSolver{
         return true;
     }
     public void neighbors(State state) {
-        int index = state.getValue().indexOf('0');
+        int index = state.getValue().indexOf(' ');
         switch (index){
             case 0:
                 String right0 = swapChar(state.getValue() , index , index+1);

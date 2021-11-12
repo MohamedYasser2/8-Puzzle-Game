@@ -12,7 +12,7 @@ public abstract class IPuzzleSolver {
     Stack<String> frontierStack = new Stack<>();
     Set<String> visited = new HashSet<>();
     PriorityQueue<State> frontierPriorityQueue = new PriorityQueue<>();
-    String goalState = "012345678";
+    String goalState = " 12345678";
 
 
     public abstract List<String> solvePuzzle(String initialState);
@@ -53,7 +53,7 @@ public abstract class IPuzzleSolver {
     according to the used algorithm for solving the puzzle
     */
     public void generateNeighbors(String state, Algorithm algorithm) {
-        int index = state.indexOf('0');
+        int index = state.indexOf(" ");
         switch (index) {
             case 0:
                 String right0 = swapChar(state , index , index+1);
