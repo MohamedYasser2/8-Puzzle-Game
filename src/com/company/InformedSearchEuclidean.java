@@ -4,7 +4,12 @@ import java.util.*;
 
 
 public class InformedSearchEuclidean extends IPuzzleSolver{
-
+    /*
+    Implementing the Informed search algorithm using Euclidean distance as heuristic function
+    for solving 8-puzzle game using a priority queue for frontiers
+    returns the path from the initial state to the goal state
+    or empty list in case that the puzzle is unsolvable
+    */
     @Override
     public List<String> solvePuzzle(String initialState) {
         pathList = new ArrayList<>();
@@ -25,8 +30,9 @@ public class InformedSearchEuclidean extends IPuzzleSolver{
         return new ArrayList<>();
     }
 
-
-
+    /*
+    A function to calculate the Euclidean distance between the current state and the goal state
+     */
     public static int EuclideanDistance(String st){
         int result = 0,x=0,y=0,xg=0,yg=0;
         for (int i=0;i<9;++i){
@@ -111,6 +117,13 @@ public class InformedSearchEuclidean extends IPuzzleSolver{
         }
         return result;
     }
+
+    /*
+    A function that takes the current state of the puzzle as a parameter
+    and according to the position of '0',
+    It generates all the neighbors of '0' that the '0' can be moved to
+    and push them to the priority queue frontier
+    */
     public void neighbors(State state) {
         int index = state.getValue().indexOf(' ');
         switch (index){
@@ -255,6 +268,10 @@ public class InformedSearchEuclidean extends IPuzzleSolver{
                 break;
         }
     }
+
+    /*
+    A function to calculate the key (the cost) of the current state
+     */
     private static int calcKey(State parent, String st){
 
         return (parent.getKey()-EuclideanDistance(parent.getValue()))+EuclideanDistance(st)+1;
