@@ -20,21 +20,4 @@ public class DFS extends IPuzzleSolver{
         }
         return new ArrayList<>();
     }
-
-//    public boolean dfs (String initialState) {
-//        frontier.add(initialState);
-//        while (!frontier.isEmpty()) {
-//            String currentState = frontier.pop();
-//            visitedStates.add(currentState);
-//            if (currentState.equals(goalState)) {
-//                getPath(currentState, initialState);
-//                Collections.reverse(pathList);
-//                pathList.add(goalState);
-//                System.out.println(pathList);
-//                return true;
-//            }
-//            generateNeighbors(currentState, frontier, visitedStates, hashMap);
-//        }
-//        return false;
-//    }
 }
