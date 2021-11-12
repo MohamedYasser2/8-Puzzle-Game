@@ -16,7 +16,7 @@ public class BFS extends IPuzzleSolver{
                 pathList.add(goalState);
                 return pathList;
             }
-            generateNeighbors(top, SolverAlgorithm.BFS);
+            generateNeighbors(top, Algorithm.BFS);
         }
         return new ArrayList<>();
     }

@@ -16,7 +16,7 @@ public class DFS extends IPuzzleSolver{
                 pathList.add(goalState);
                 return pathList;
             }
-            generateNeighbors(currentState, SolverAlgorithm.DFS);
+            generateNeighbors(currentState, Algorithm.DFS);
         }
         return new ArrayList<>();
     }

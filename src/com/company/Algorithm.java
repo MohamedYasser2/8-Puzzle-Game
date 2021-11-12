@@ -1,5 +1,5 @@
 package com.company;
 
-public enum SolverAlgorithm {
+public enum Algorithm {
     DFS, BFS, MANHATTANINFORMED, EUCLIDEANINFORMED
 }

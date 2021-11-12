@@ -33,7 +33,7 @@ public abstract class IPuzzleSolver {
         return sb.toString();
     }
 
-    public void generateNeighbors(String state, SolverAlgorithm algorithm) {
+    public void generateNeighbors(String state, Algorithm algorithm) {
         int index = state.indexOf('0');
         switch (index) {
             case 0:
@@ -105,7 +105,7 @@ public abstract class IPuzzleSolver {
         }
     }
 
-    private void addNeighborToFrontier(String parentState, String childState, SolverAlgorithm algorithm) {
+    private void addNeighborToFrontier(String parentState, String childState, Algorithm algorithm) {
         switch (algorithm) {
             case BFS:
                 if (!visited.contains(childState)) {
