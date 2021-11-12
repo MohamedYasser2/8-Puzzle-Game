@@ -10,6 +10,10 @@ public class BFS extends IPuzzleSolver{
     */
     @Override
     public List<String> solvePuzzle(String initialState) {
+        frontierQueue = new LinkedList<>();
+        visited = new HashSet<>();
+        hashMap = new HashMap<>();
+        pathList = new ArrayList<>();
         frontierQueue.add(initialState);
         while (!frontierQueue.isEmpty()){
             String top = frontierQueue.poll();
