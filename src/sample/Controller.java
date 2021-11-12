@@ -57,7 +57,7 @@ public class Controller {
     IPuzzleSolver dfs =new DFS();
     IPuzzleSolver amanhatten=new InformedSearchManhattan();
     IPuzzleSolver aeuclidean=new InformedSearchEuclidean();
-
+    //method to enable all buttons to start the process again
     public void enable()
     {
         textfield.setDisable(false);
@@ -66,6 +66,7 @@ public class Controller {
         manhaten.setDisable(false);
         euclidean.setDisable(false);
     }
+    //method to disable buttons when the process is started
     public void disable()
     {
         textfield.setDisable(true);
@@ -74,6 +75,7 @@ public class Controller {
         manhaten.setDisable(true);
         euclidean.setDisable(true);
     }
+   // method to initialize the buttons
     private void makeBtnList()
     {
         buttonlist.clear();
@@ -87,6 +89,7 @@ public class Controller {
         buttonlist.add(bt7);
         buttonlist.add(bt8);
     }
+    //method to check if the input text is correct
     private boolean checkText()
     {
         String t = textfield.getText();
@@ -102,10 +105,12 @@ public class Controller {
             return false;
         }
     }
+    //method to check if the initial state is a goal
     private void checkGoal(String t){
         if(t.equals("012345678"))
             next.setDisable(true);
     }
+    //method to put text in the buttons and to change the color of the 0 button
     private void iteration()
     {
 
@@ -120,6 +125,7 @@ public class Controller {
         }
 
     }
+    //main method to solve using bfs
     public void Breadth_First(ActionEvent e) {
         check=checkText();
         if (check == true) {
@@ -131,6 +137,7 @@ public class Controller {
             currentList = (ArrayList<String>) bfs.solvePuzzle(t.replace('0',' '));
             count = 0;
             size = currentList.size();
+            //if the input is unsolvable the size of the array will be zero so show error message
             if (size == 0) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setHeaderText("Input Not Solvable");
@@ -144,7 +151,7 @@ public class Controller {
         }
     }
 
-
+    //main method to solve using dfs
     public void Depth_First(ActionEvent e) throws InterruptedException {
         check = checkText();
         if (check == true) {
@@ -156,6 +163,7 @@ public class Controller {
             currentList = (ArrayList<String>) dfs.solvePuzzle(t.replace('0',' '));
             count = 0;
             size = currentList.size();
+            //if the input is unsolvable the size of the array will be zero so show error message
             if (size == 0) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setHeaderText("Input Not Solvable");
@@ -168,6 +176,7 @@ public class Controller {
             }
         }
     }
+    //main method to solve using manhatten heuristic
     public void Manhatten(ActionEvent e) throws InterruptedException {
         check = checkText();
         if (check == true) {
@@ -179,6 +188,7 @@ public class Controller {
             currentList = (ArrayList<String>) amanhatten.solvePuzzle(t.replace('0',' '));
             count = 0;
             size = currentList.size();
+            //if the input is unsolvable the size of the array will be zero so show error message
             if (size == 0) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setHeaderText("Input Not Solvable");
@@ -191,6 +201,7 @@ public class Controller {
             }
         }
     }
+    //main method to solve using euclidean heuristic
     public void Euclidean(ActionEvent e) throws InterruptedException {
         check = checkText();
         if (check == true) {
@@ -202,6 +213,7 @@ public class Controller {
             currentList = (ArrayList<String>) aeuclidean.solvePuzzle(t.replace('0',' '));
             count = 0;
             size = currentList.size();
+            //if the input is unsolvable the size of the array will be zero so show error message
             if (size == 0) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setHeaderText("Input Not Solvable");
@@ -214,6 +226,7 @@ public class Controller {
             }
         }
     }
+    //method to preview the next node
     public void Next(ActionEvent e){
         previous.setDisable(false);
         count++;
@@ -228,6 +241,7 @@ public class Controller {
              iteration();
         }
     }
+    //method to review the previous node
     public void Previous(ActionEvent e){
         next.setDisable(false);
          if(count==1)
@@ -243,6 +257,7 @@ public class Controller {
              iteration();
         }
     }
+    //method to reset all buttons and list to initial state of the application
     public void reset(ActionEvent e)
     {
         if(!buttonlist.isEmpty()){
