@@ -1,25 +1,23 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class InformedSearchEuclidean extends IPuzzleSolver{
 
     @Override
     public List<String> solvePuzzle(String initialState) {
+        pathList = new ArrayList<>();
+        visited = new HashSet<>();
+        frontierPriorityQueue = new PriorityQueue<>();
         frontierPriorityQueue.add(new State(initialState,EuclideanDistance(initialState)));
         while (!frontierPriorityQueue.isEmpty()) {
             State top = frontierPriorityQueue.poll();
-            //System.out.println(top.key);
             visited.add(top.getValue());
             if (top.getValue().equals(goalState)){
                 getPath(top.getValue(), initialState);
                 Collections.reverse(pathList);
                 pathList.add(goalState);
-                System.out.println(pathList.toString());
                 return pathList;
             }
             neighbors(top);
@@ -29,90 +27,6 @@ public class InformedSearchEuclidean extends IPuzzleSolver{
 
 
 
-    public static int ManhattanDistance(String st){
-        int result = 0,x=0,y=0,xg=0,yg=0;
-        for (int i=0;i<9;++i){
-            switch (i){
-                case 0:
-                    xg=1;
-                    yg=1;
-                    break;
-                case 1:
-                    xg=2;
-                    yg=1;
-                    break;
-                case 2:
-                    xg=3;
-                    yg=1;
-                    break;
-                case 3:
-                    xg=1;
-                    yg=2;
-                    break;
-                case 4:
-                    xg=2;
-                    yg=2;
-                    break;
-                case 5:
-                    xg=3;
-                    yg=2;
-                    break;
-                case 6:
-                    xg=1;
-                    yg=3;
-                    break;
-                case 7:
-                    xg=2;
-                    yg=3;
-                    break;
-                case 8:
-                    xg=3;
-                    yg=3;
-                    break;
-            }
-            int ind = st.indexOf(Integer.toString(i));
-            switch (ind){
-                case 0:
-                    x=1;
-                    y=1;
-                    break;
-                case 1:
-                    x=2;
-                    y=1;
-                    break;
-                case 2:
-                    x=3;
-                    y=1;
-                    break;
-                case 3:
-                    x=1;
-                    y=2;
-                    break;
-                case 4:
-                    x=2;
-                    y=2;
-                    break;
-                case 5:
-                    x=3;
-                    y=2;
-                    break;
-                case 6:
-                    x=1;
-                    y=3;
-                    break;
-                case 7:
-                    x=2;
-                    y=3;
-                    break;
-                case 8:
-                    x=3;
-                    y=3;
-                    break;
-            }
-            result+= Math.abs(x-xg)+Math.abs(y-yg);
-        }
-        return result;
-    }
     public static int EuclideanDistance(String st){
         int result = 0,x=0,y=0,xg=0,yg=0;
         for (int i=0;i<9;++i){
@@ -196,41 +110,6 @@ public class InformedSearchEuclidean extends IPuzzleSolver{
             result+= Math.sqrt((x-xg)*(x-xg)+(y-yg)*(y-yg));
         }
         return result;
-    }
-
-//    public static void main(String[] args){
-//        //PriorityQueue<State> queue = new PriorityQueue<>();
-////        frontier.add(new State("hh",2));
-////        frontier.add(new State("hhh",3));
-////        frontier.add(new State("h",-1));
-////        frontier.add(new State("-",-10));
-////        Random rd = new Random();
-////       for (int i=0;i<20;++i)
-////            frontier.add(new State("",rd.nextInt()));
-////        while (!frontier.isEmpty()) {
-////            System.out.println(frontier.poll().key);
-////        }
-//        System.out.println(ManhattanDistance("125340678"));
-//        System.out.println(EuclideanDistance("125340678"));
-//        informedSearch("125340678");
-//    }
-
-
-    public boolean informedSearch(String initialState){
-        frontierPriorityQueue.add(new State(initialState,EuclideanDistance(initialState)));
-        while (!frontierPriorityQueue.isEmpty()) {
-            State top = frontierPriorityQueue.poll();
-            //System.out.println(top.key);
-            visited.add(top.getValue());
-            if (top.getValue().equals("012345678")){
-                getPath(top.getValue(), initialState);
-                Collections.reverse(pathList);
-                System.out.println(pathList.toString());
-                return true;
-            }
-            neighbors(top);
-        }
-        return true;
     }
     public void neighbors(State state) {
         int index = state.getValue().indexOf(' ');
@@ -380,20 +259,5 @@ public class InformedSearchEuclidean extends IPuzzleSolver{
 
         return (parent.getKey()-EuclideanDistance(parent.getValue()))+EuclideanDistance(st)+1;
     }
-
-    public boolean inFrontier(String state,int key){
-        Iterator it = frontierPriorityQueue.iterator();
-        while (it.hasNext()){
-            State tem = (State) it.next();
-            if (tem.getValue().equals(state)) {
-                frontierPriorityQueue.remove(tem);
-                tem.setKey(Math.min(tem.getKey(),key));
-                frontierPriorityQueue.add(tem);
-                return true;
-            }
-        }
-        return false;
-    }
-
 
 }

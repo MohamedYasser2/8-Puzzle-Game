@@ -146,5 +146,19 @@ public abstract class IPuzzleSolver {
                 break;
         }
     }
+
+    public boolean inFrontier(String state,int key){
+        Iterator it = frontierPriorityQueue.iterator();
+        while (it.hasNext()){
+            State tem = (State) it.next();
+            if (tem.getValue().equals(state)) {
+                frontierPriorityQueue.remove(tem);
+                tem.setKey(Math.min(tem.getKey(),key));
+                frontierPriorityQueue.add(tem);
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
